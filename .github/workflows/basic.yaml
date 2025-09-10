@@ -15,8 +15,8 @@ on:
 
 # A Workflow Run is made up of one or more Jobs that can run sequentially or in parallel
 jobs:
-    # This Workflow contains a single job called "build"
-    build:
+    # This Job checks out the code from the repository
+    checkout:
         # The type of Runner that the Job will run on
         runs-on: ubuntu-latest
 
@@ -25,6 +25,11 @@ jobs:
             # Checks-out your repository under $GITHUB_WORKSPACE
             - uses: actions/checkout@v3
 
+    # This job does the core processing
+    process:
+        runs-on: ubuntu-latest
+
+        steps:
             # Runs a single command using the Runner's shell
             - name: Run a one-line script
               run: echo "Hello, world!"
