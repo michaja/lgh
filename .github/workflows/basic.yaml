@@ -44,6 +44,6 @@ jobs:
           path: |
             foo.txt
             bar.txt
-          key: ${{ matrix.os }}_${{ steps.get-date.outputs.date }}_${{ hashFiles('foo.txt', 'bar.txt') }}
+          key: ${{ runner.os }}_${{ steps.get-date.outputs.date }}_${{ hashFiles('foo.txt', 'bar.txt') }}
           restore-keys: |
-            ${{ matrix.os }}_${{ steps.get-date.outputs.date }}_
+            ${{ runner.os }}_${{ steps.get-date.outputs.date }}_
