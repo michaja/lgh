@@ -29,7 +29,7 @@ jobs:
       - name: Get date
         id: get-date
         run: |
-          echo "::set-output name=date::$( /bin/date -u "+%Y-%m-%d" )"
+          echo "date=$( /bin/date -u "+%Y-%m-%d" )" >> $GITHUB_OUTPUT
         shell: bash
 
       - name: Cache some data
