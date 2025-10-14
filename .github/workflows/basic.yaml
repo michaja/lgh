@@ -23,11 +23,27 @@ jobs:
   process:
     runs-on: ubuntu-latest
     steps:
-      # Runs a single command using the Runner's shell
+
       - name: Run a one-line script
         run: echo "Hello, world!"
-      # Runs a set of commands using the Runner's shell
+
       - name: Run a multi-line script
         run: |-
           echo "Add other actions to build,"
           echo "test, and deploy your project."
+
+      - name: Get date
+        id: get-date
+        run: |
+          echo "::set-output name=date::$( /bin/date -u "+%Y-%m-%d" )"
+        shell: bash
+
+      - name: Cache some data
+        uses: actions/cache@v3
+        with:
+          path: |
+            foo.txt
+            bar.txt
+          key: ${{ matrix.os }}_${{ steps.get-date.outputs.date }}_${{ hashFiles('foo.txt', 'bar.txt') }}
+          restore-keys: |
+            ${{ matrix.os }}_${{ steps.get-date.outputs.date }}_
